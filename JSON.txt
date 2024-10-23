@@ -1,0 +1,120 @@
+POM.XML FILE
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.example</groupId>
+  <artifactId>JACKSON</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>Archetype - JACKSON</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+  <dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.13.0</version> <!-- Make sure to use the latest version -->
+  </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version> <!-- You can use the latest version -->
+    </dependency>
+
+  </dependencies>
+</project>
+
+JSON READING FILE
+-------------------
+import com.google.gson.Gson;
+
+class Person {
+    String name;
+    int age;
+    boolean isStudent;
+
+    @Override
+    public String toString() {
+        return "Person : [name=" + name + ", age=" + age + ", isStudent=" + isStudent + "]";
+    }
+}
+
+public class JsonReadingExample {
+    public static void main(String[] args) {
+        String jsonData = "{\"name\":\"John\",\"age\":30,\"isStudent\":false}";
+
+        // Create a Gson instance
+        Gson gson = new Gson();
+
+        // Convert JSON to Java object (deserialize)
+        Person person = gson.fromJson(jsonData, Person.class);
+
+        // Output the Java object
+        System.out.println(person);
+    }
+}
+
+JSON WRITTING FILE
+-------------------
+import com.google.gson.Gson;
+
+class Person {
+    String name;
+    int age;
+    boolean isStudent;
+
+    public Person(String name, int age, boolean isStudent) {
+        this.name = name;
+        this.age = age;
+        this.isStudent = isStudent;
+    }
+}
+
+public class JsonWritingExample {
+    public static void main(String[] args) {
+        // Create a Person object
+        Person person = new Person("John", 25, true);
+
+        // Create a Gson instance
+        Gson gson = new Gson();
+
+        // Convert Java object to JSON (serialize)
+        String jsonData = gson.toJson(person);
+
+        // Output the JSON string
+        System.out.println(jsonData);
+    }
+}
+
+JACKSONG READING FILE
+-------------------------
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+class Person
+{
+    String name;
+    int age;
+
+    @Override
+    public  String toString()
+    {
+        return  "name : " +name +" age : "+age;
+    }
+}
+
+class scratch
+{
+    public static void main(String[] args) {
+
+        String data="{\"name\":\"Anu\",\"age\":30}";
+
+        ObjectMapper om=new ObjectMapper();
+        try {
+            Person p =om.readValue(data,Person.class);
+            System.out.println(p);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}
+
